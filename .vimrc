@@ -15,6 +15,7 @@ set smartcase "検索文字列に大文字が含まれている場合は区別�
 set wrapscan "検
 
 autocmd ColorScheme * highlight Comment ctermfg=22 guifg=#008800
+autocmd BufNewFile,BufRead *.{html,htm,vue*} set filetype=html
 
 set encoding=utf-8
 scriptencoding utf-8
@@ -157,14 +158,6 @@ NeoBundle 'Shougo/neomru.vim'
 " インデントの可視化
 NeoBundle 'Yggdroot/indentLine'
 
-if has('lua') " lua機能が有効になっている場合・・・・・・①
- " コードの自動補完
- NeoBundle 'Shougo/neocomplete.vim'
- " スニペットの補完機能
- NeoBundle "Shougo/neosnippet"
-  " スニペット集
- NeoBundle 'Shougo/neosnippet-snippets'
-endif
 
 " 多機能セレクタ
 NeoBundle 'ctrlpvim/ctrlp.vim'
@@ -248,6 +241,9 @@ command! CtrlPCommandLine call ctrlp#init(ctrlp#commandline#id())
 
 " CtrlPFunkyの有効化
 let g:ctrlp_funky_matchtype = 'path' 
+
+hi Comment ctermfg=LightGreen
+
 
 "----------------------------------------------------------
 "" Syntasticの設定
