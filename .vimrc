@@ -20,6 +20,11 @@ autocmd BufNewFile,BufRead *.{html,htm,vue*} set filetype=html
 set encoding=utf-8
 scriptencoding utf-8
 
+" tabのスペースの設定
+set tabstop=2
+set shiftwidth=2
+set expandtab
+
 "" Copy/Paste/Cut
 if has('unnamedplus')
   set clipboard=unnamed,unnamedplus
@@ -28,6 +33,16 @@ endif
 noremap YY "+y<CR>
 noremap <leader>p "+gP<CR>
 noremap XX "+x<CR>
+
+"閉じタグ自動補完
+inoremap <expr> % Lt_Percent_Completion()
+function Lt_Percent_Completion()
+ if matchstr(getline('.'), '.', col('.') -1 ) == ">"
+   return "\%\%\<Left>"
+  else
+    return "\%"
+  end
+endf
 
 ""jjを打つことでインサートモード終了
 inoremap <silent> jj <ESC>
@@ -83,6 +98,7 @@ augroup MyXML
   autocmd Filetype xml inoremap <buffer> </ </<C-x><C-o>
   autocmd Filetype html inoremap <buffer> </ </<C-x><C-o>
   autocmd Filetype eruby inoremap <buffer> </ </<C-x><C-o>
+  autocmd Filetype rb inoremap <buffer> </ </<C-x><C-o>
 augroup END
 
 " バックスペースキーの有効化
